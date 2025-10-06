@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Common Data Curation Schema",
+  "description": "Unified schema for curated code examples across all task branches",
+  "type": "object",
+  "required": ["id", "task", "input", "output", "metadata"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this example"
+    },
+    "task": {
+      "type": "string",
+      "enum": ["code_generation", "debugging", "refactoring", "documentation"],
+      "description": "The task type this example belongs to"
+    },
+    "input": {
+      "type": "string",
+      "description": "Input for the task (e.g., function signature, buggy code)"
+    },
+    "output": {
+      "type": "string",
+      "description": "Expected output for the task (e.g., function body, fixed code)"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata about the example",
+      "properties": {
+        "source_file": {
+          "type": "string",
+          "description": "Original source file path"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this example was extracted"
+        },
+        "function_name": {
+          "type": "string",
+          "description": "Name of the function (for code generation tasks)"
+        },
+        "line_start": {
+          "type": "integer",
+          "description": "Starting line number in source file"
+        },
+        "line_end": {
+          "type": "integer",
+          "description": "Ending line number in source file"
+        },
+        "has_docstring": {
+          "type": "boolean",
+          "description": "Whether the example includes a docstring"
+        }
+      }
+    }
+  }
+}

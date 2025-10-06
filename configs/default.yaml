@@ -1,0 +1,58 @@
+# Default Configuration for Secure Data Curation Pipeline
+
+# Discovery Settings
+discovery_mode: local  # Options: local, github, url
+discovery_sources:
+  - data/sample_code  # Sample local directory
+max_repos: 10
+
+# License Settings
+allowed_licenses:
+  - MIT
+  - Apache-2.0
+  - BSD-3-Clause
+  - BSD-2-Clause
+  - ISC
+  - Python-2.0
+license_strict: false  # Set to true to reject repos without explicit license
+
+# Security Settings
+security_checks:
+  - bandit
+  - secrets
+  - malware
+bandit_severity: medium  # Options: low, medium, high
+
+# Cleaning Settings
+exclude_patterns:
+  - "*/test/*"
+  - "*/tests/*"
+  - "*/vendor/*"
+  - "*/node_modules/*"
+  - "*/__pycache__/*"
+  - "*.pyc"
+  - "*.pyo"
+  - "*.egg-info/*"
+min_file_size: 10       # bytes
+max_file_size: 1048576  # 1MB
+format_code: true
+
+# Task Branch
+task_branch: codegen  # Options: codegen, debugging, refactor, docs
+
+# Output Settings
+output_formats:
+  - ft   # Fine-tuning format
+  - rag  # RAG format
+train_split: 0.8
+val_split: 0.1
+test_split: 0.1
+
+# Paths
+data_dir: data
+reports_dir: reports
+schema_path: schemas/common.schema.json
+
+# Misc
+random_seed: 42
+deterministic: true
