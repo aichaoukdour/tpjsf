@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Common Dataset Record Schema",
+  "description": "Unified schema for all task types",
+  "type": "object",
+  "required": ["id", "task", "input", "output", "metadata"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier (UUID)",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "task": {
+      "type": "string",
+      "description": "Task type",
+      "enum": ["codegen", "debugging", "refactor", "docs"]
+    },
+    "input": {
+      "type": "string",
+      "description": "Input prompt or source snippet",
+      "minLength": 1
+    },
+    "output": {
+      "type": "string",
+      "description": "Target code or completion",
+      "minLength": 1
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["repo", "path", "commit", "license", "hash", "checks", "split"],
+      "properties": {
+        "repo": {
+          "type": "string",
+          "description": "Repository name (owner/name)"
+        },
+        "path": {
+          "type": "string",
+          "description": "File path within repository"
+        },
+        "commit": {
+          "type": "string",
+          "description": "Git commit SHA"
+        },
+        "license": {
+          "type": "string",
+          "description": "Detected license"
+        },
+        "hash": {
+          "type": "string",
+          "description": "Content hash (sha256:...)",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "checks": {
+          "type": "object",
+          "required": ["license", "secrets", "sast"],
+          "properties": {
+            "license": {
+              "type": "string",
+              "enum": ["pass", "fail"]
+            },
+            "secrets": {
+              "type": "string",
+              "enum": ["pass", "fail"]
+            },
+            "sast": {
+              "type": "string",
+              "enum": ["pass", "fail"]
+            }
+          }
+        },
+        "split": {
+          "type": "string",
+          "enum": ["train", "val", "test"]
+        }
+      }
+    }
+  }
+}

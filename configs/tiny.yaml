@@ -1,0 +1,30 @@
+# Tiny config for quick testing
+run_id: "tiny-test"
+
+sources:
+  github:
+    query: "language:Python stars:>1000"
+    max_repos: 2
+  local_datasets: []
+
+compliance:
+  license_allow:
+    - "MIT"
+    - "BSD"
+    - "Apache-2.0"
+
+security:
+  enable_sast: true
+  enable_secrets: true
+  enable_malware: true
+
+cleaning:
+  drop_tests: true
+  max_file_mb: 0.5
+  dedupe_level: "function"
+
+branch: "codegen"
+
+output:
+  type: "finetune"
+  version: "v1"

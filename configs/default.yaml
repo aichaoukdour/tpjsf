@@ -1,0 +1,32 @@
+run_id: "trial-001"
+
+sources:
+  github:
+    query: "language:Python stars:>100"
+    max_repos: 20
+    # token: ""  # Optional: Set GITHUB_TOKEN env var or uncomment and add token
+  local_datasets: []
+
+compliance:
+  license_allow:
+    - "MIT"
+    - "BSD"
+    - "BSD-3-Clause"
+    - "BSD-2-Clause"
+    - "Apache-2.0"
+
+security:
+  enable_sast: true
+  enable_secrets: true
+  enable_malware: true
+
+cleaning:
+  drop_tests: true
+  max_file_mb: 1.0
+  dedupe_level: "function"  # file | function
+
+branch: "codegen"  # debugging | codegen | refactor | docs
+
+output:
+  type: "finetune"  # finetune | rag
+  version: "v1"
